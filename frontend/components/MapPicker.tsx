@@ -4,9 +4,28 @@ import { useEffect, useRef } from "react";
 import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-// OpenFreeMap ships "liberty"/"bright"/"positron" — no key required. No dedicated
-// dark style exists, so the container gets a CSS invert filter to match the theme.
-const STYLE = "https://tiles.openfreemap.org/styles/liberty";
+// CARTO's free "dark_all" raster basemap — a real dark style (labels/roads
+// included, no CSS-filter hack needed), no API key required. Retina tiles
+// ({r}) for sharper rendering. Previously used OpenFreeMap's "liberty" style
+// inverted via CSS filter, which was both too dark/murky and too low-res —
+// this replaces that entirely.
+const DARK_STYLE: maplibregl.StyleSpecification = {
+  version: 8,
+  sources: {
+    "carto-dark": {
+      type: "raster",
+      tiles: [
+        "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+        "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+        "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+        "https://d.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+      ],
+      tileSize: 256,
+      attribution: "© OpenStreetMap contributors © CARTO",
+    },
+  },
+  layers: [{ id: "carto-dark-layer", type: "raster", source: "carto-dark", minzoom: 0, maxzoom: 20 }],
+};
 
 export default function MapPicker({
   lat,
@@ -25,9 +44,9 @@ export default function MapPicker({
     if (!containerRef.current || mapRef.current) return;
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: STYLE,
+      style: DARK_STYLE,
       center: [lon, lat],
-      zoom: 4,
+      zoom: 6,
       attributionControl: false,
     });
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
@@ -48,14 +67,9 @@ export default function MapPicker({
   useEffect(() => {
     if (markerRef.current && mapRef.current) {
       markerRef.current.setLngLat([lon, lat]);
-      mapRef.current.flyTo({ center: [lon, lat], zoom: Math.max(mapRef.current.getZoom(), 6) });
+      mapRef.current.flyTo({ center: [lon, lat], zoom: Math.max(mapRef.current.getZoom(), 9) });
     }
   }, [lat, lon]);
 
-  return (
-    <div
-      ref={containerRef}
-      className="w-full h-full min-h-[280px] rounded-[14px] overflow-hidden [&_.maplibregl-canvas]:brightness-75 [&_.maplibregl-canvas]:invert-[0.92] [&_.maplibregl-canvas]:hue-rotate-180"
-    />
-  );
+  return <div ref={containerRef} className="w-full h-full min-h-[280px] rounded-[14px] overflow-hidden" />;
 }

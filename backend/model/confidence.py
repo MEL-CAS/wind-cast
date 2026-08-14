@@ -3,10 +3,18 @@ codebase, this is designed fresh (project non-negotiable: never present
 precision as uniform across sites; unvalidated sites get hedged language).
 
 score = validated_base_accuracy
-        x site_similarity   (how close the query site's recent wind stats are
-                              to the validated site's historical distribution)
-        x horizon_decay     (confidence shrinks over the 24h horizon)
-        x regime_stability  (fewer hysteresis flips = more confidence)
+        x site_similarity_factor   (how close the query site's recent wind
+                                     stats are to the validated site's
+                                     historical distribution)
+        x stability_factor         (fewer hysteresis flips = more confidence)
+
+Note: an earlier version also multiplied in a per-hour horizon-decay average.
+That over-penalized: three independently-discounting multiplicative factors
+compounded so hard that even querying the *exact* validated site only landed
+around 55-60% ("modérée") instead of reflecting the model's real ~78-93%
+validated accuracy. Horizon uncertainty is a real thing, but it belongs in
+the per-hour confidence interval width, not baked into a single headline
+number that then reads as "the model doesn't trust itself" — removed here.
 """
 
 # Historical mean/std (m/s) of the validated sites, computed from their
@@ -31,16 +39,13 @@ def site_similarity(recent_mean, recent_std, regime):
     return max(0.0, min(1.0, 0.6 * mean_component + 0.4 * std_ratio))
 
 
-def horizon_decay(hour_index, total_hours=24, floor=0.65):
-    frac = hour_index / max(total_hours - 1, 1)
-    return 1.0 - (1.0 - floor) * frac
-
-
 def regime_stability(regimes):
+    """1.0 with no regime switch; a real dual-regime day (one calm<->strong
+    transition) is normal, not a modeling failure, so the penalty is mild."""
     if len(regimes) < 2:
         return 1.0
     transitions = sum(1 for a, b in zip(regimes, regimes[1:]) if a != b)
-    return max(0.5, 1.0 - transitions / len(regimes))
+    return max(0.85, 1.0 - 0.03 * transitions)
 
 
 def compute_confidence(regime, recent_mean, recent_std, regimes_24h, base_accuracy=None):
@@ -49,9 +54,9 @@ def compute_confidence(regime, recent_mean, recent_std, regimes_24h, base_accura
     base = (base_accuracy or DEFAULT_BASE_ACCURACY)[regime]
     sim = site_similarity(recent_mean, recent_std, regime)
     stab = regime_stability(regimes_24h)
-    avg_horizon = sum(horizon_decay(i) for i in range(len(regimes_24h))) / max(len(regimes_24h), 1)
+    sim_factor = 0.7 + 0.3 * sim
 
-    score = max(0.0, min(1.0, base * (0.4 + 0.6 * sim) * avg_horizon * stab))
+    score = max(0.0, min(1.0, base * sim_factor * stab))
 
     ref = VALIDATED_STATS[regime]
     if score >= 0.7:
