@@ -1,0 +1,114 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "prediction": "Prédiction",
+    "methodology": "Méthodologie",
+    "contact": "Contact",
+    "cta": "Tester sur votre site"
+  },
+  "hero": {
+    "badge": "Validé sur Milan & Wellington — double-modèle calme / fort",
+    "title1": "Anticipez le vent,",
+    "title2": "sécurisez vos opérations.",
+    "subtitle": "Prévision de vitesse de vent à 24h, calibrée par régime, pour vos décisions de levage, de sécurité chantier et de production éolienne.",
+    "ctaPrimary": "Tester sur votre site",
+    "ctaSecondary": "Voir la méthodologie",
+    "trust": {
+      "mae": "MAE · Milan (calme)",
+      "r2": "R² · Wellington (fort)",
+      "horizon": "Horizon de prévision",
+      "threshold": "Seuil calme / fort"
+    }
+  },
+  "bento": {
+    "metric": {
+      "label": "Précision validée · Milan",
+      "sub": "MAE · XGBoost, régime calme"
+    },
+    "confidence": {
+      "label": "Indice de confiance",
+      "unit": "CONFIANCE"
+    },
+    "regime": {
+      "label": "Régime détecté · prochaines 24h",
+      "calm": "Calme (< 10 m/s)",
+      "strong": "Fort (≥ 10 m/s)"
+    },
+    "live": {
+      "label": "Prévision live · vitesse du vent",
+      "tag": "EN DIRECT · Open-Meteo"
+    },
+    "map": {
+      "caption": "Wellington, NZ — site de validation vent fort"
+    },
+    "use1": {
+      "title": "Planification de levage",
+      "text": "Anticipez les seuils de vent critiques pour vos opérations de grue et sécurisez vos plannings de chantier."
+    },
+    "use2": {
+      "title": "Sécurité chantier",
+      "text": "Repérez à l'avance les créneaux à risque et adaptez vos consignes de sécurité bien en amont."
+    },
+    "use3": {
+      "title": "Production électrique",
+      "text": "Anticipez la production d'un parc éolien sur 24h pour affiner vos décisions opérationnelles."
+    }
+  },
+  "method": {
+    "title": "Transparence méthodologique",
+    "text": "Chaque prévision affiche systématiquement MAE, RMSE, MAPE et R² ensemble — jamais une métrique isolée. Validation sur split chronologique causal, sans fuite de données.",
+    "mae": "MAE m/s",
+    "rmse": "RMSE m/s",
+    "mape": "MAPE",
+    "r2": "R²"
+  },
+  "footer": {
+    "tagline": "WindCast — prévision de vent pour l'industrie"
+  },
+  "prediction": {
+    "title": "Prédiction",
+    "subtitle": "Recherchez un site ou cliquez sur la carte pour obtenir une prévision de vent à 24h.",
+    "searchPlaceholder": "Rechercher une ville, un site...",
+    "mapHint": "Cliquez sur la carte pour choisir un point",
+    "lastUpdated": "Dernière mise à jour",
+    "refreshing": "Actualisation...",
+    "coldStart": {
+      "title": "Initialisation du moteur de prévision…",
+      "text": "Le service peut prendre jusqu'à une minute à démarrer après une période d'inactivité."
+    },
+    "error": "Impossible de récupérer la prévision. Réessayez dans un instant.",
+    "details": "Détails techniques",
+    "modelUsed": "Modèle utilisé",
+    "exportPdf": "Exporter en PDF",
+    "addCompare": "Comparer un autre site",
+    "compareTitle": "Comparaison multi-sites",
+    "regimeTimeline": "Régime détecté par heure",
+    "chartTitle": "Prévision 24h",
+    "confidenceNote": "Prévision indicative — la précision varie selon le site interrogé.",
+    "removeSite": "Retirer"
+  },
+  "methodology": {
+    "title": "Méthodologie",
+    "subtitle": "Un pipeline double-modèle, validé et transparent.",
+    "pipeline": {
+      "title": "Pipeline de prévision",
+      "text": "Régime calme (< 10 m/s) : modèle XGBoost entraîné directement sur les lectures calmes. Régime fort (≥ 10 m/s) : réseau GRU (séquence 24h) corrigé par un second modèle XGBoost entraîné sur les résidus. Le régime est déterminé heure par heure avec une bande d'hystérésis (9.5–10.5 m/s) pour éviter les bascules erratiques."
+    },
+    "validation": {
+      "title": "Validation",
+      "calmSite": "Milan — régime calme",
+      "strongSite": "Wellington, NZ — régime fort"
+    },
+    "limits": {
+      "title": "Limites, en toute honnêteté",
+      "text": "Sur les sites très calmes, l'erreur relative (MAPE) augmente mécaniquement car le vent réel est proche de zéro — un plancher de bruit irréductible existe. Pour un site non testé, la prévision reste indicative : l'indice de confiance en tient compte et le formule prudemment."
+    },
+    "mapeNote": "Le MAPE affiché est calculé point par point sur les lectures > 1 m/s (mesure standard). Il ne doit pas être confondu avec une erreur relative simplifiée (MAE / vitesse moyenne), qui donnerait un chiffre différent."
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Une question, un site à tester ? Écrivez-moi.",
+    "email": "Envoyer un email",
+    "freelance": "Disponible en freelance pour des missions de prévision et de data science appliquée."
+  }
+}

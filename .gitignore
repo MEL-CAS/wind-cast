@@ -1,0 +1,19 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Node / Next.js
+node_modules/
+.next/
+frontend/.env.local
+frontend/next-env.d.ts
+
+# Regenerable data caches (re-downloaded from Open-Meteo on demand)
+backend/model/cache/
+calm_wind_v2/*_raw_v2.csv
+*_wind_10y.csv
+
+# OS
+.DS_Store
+Thumbs.db

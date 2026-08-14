@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0c0e12;
+  --color-bg-soft: #13161c;
+  --color-card: #171b22;
+  --color-card-hover: #1d222b;
+  --color-border: rgba(255, 255, 255, 0.07);
+  --color-border-strong: rgba(255, 255, 255, 0.15);
+  --color-text-primary: #f3f3ef;
+  --color-text-secondary: #9aa0ac;
+  --color-text-muted: #666b77;
+  --color-accent: #ff6a39;
+  --color-accent-hi: #ff8b63;
+  --color-accent-soft: rgba(255, 106, 57, 0.12);
+  --color-accent-2: #2fd9a5;
+  --color-accent-2-soft: rgba(47, 217, 165, 0.12);
+  --color-accent-3: #5b8def;
+  --font-sans: var(--font-inter), -apple-system, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-text-primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent-2);
+  outline-offset: 2px;
+}
+
+.bg-halo {
+  background:
+    radial-gradient(600px 400px at 18% 8%, rgba(255, 106, 57, 0.1), transparent 60%),
+    radial-gradient(700px 500px at 85% 20%, rgba(47, 217, 165, 0.08), transparent 60%),
+    radial-gradient(900px 700px at 50% 100%, rgba(91, 141, 239, 0.06), transparent 60%);
+}
+
+.bg-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.04) 1px, transparent 0);
+  background-size: 34px 34px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 30%, transparent 75%);
+}
+
+.bg-vignette {
+  background: radial-gradient(ellipse 120% 80% at 50% 0%, transparent 40%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+@keyframes pulse-dot {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  70% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes grow-bar {
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes blink-dot {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes ripple-pin {
+  to {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

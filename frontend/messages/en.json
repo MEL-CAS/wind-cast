@@ -1,0 +1,114 @@
+{
+  "nav": {
+    "home": "Home",
+    "prediction": "Prediction",
+    "methodology": "Methodology",
+    "contact": "Contact",
+    "cta": "Test on your site"
+  },
+  "hero": {
+    "badge": "Validated on Milan & Wellington — dual calm / strong model",
+    "title1": "Anticipate the wind,",
+    "title2": "secure your operations.",
+    "subtitle": "24h wind speed forecasting, calibrated by regime, for your lifting, site safety and wind power production decisions.",
+    "ctaPrimary": "Test on your site",
+    "ctaSecondary": "See the methodology",
+    "trust": {
+      "mae": "MAE · Milan (calm)",
+      "r2": "R² · Wellington (strong)",
+      "horizon": "Forecast horizon",
+      "threshold": "Calm / strong threshold"
+    }
+  },
+  "bento": {
+    "metric": {
+      "label": "Validated accuracy · Milan",
+      "sub": "MAE · XGBoost, calm regime"
+    },
+    "confidence": {
+      "label": "Confidence index",
+      "unit": "CONFIDENCE"
+    },
+    "regime": {
+      "label": "Detected regime · next 24h",
+      "calm": "Calm (< 10 m/s)",
+      "strong": "Strong (≥ 10 m/s)"
+    },
+    "live": {
+      "label": "Live forecast · wind speed",
+      "tag": "LIVE · Open-Meteo"
+    },
+    "map": {
+      "caption": "Wellington, NZ — strong-wind validation site"
+    },
+    "use1": {
+      "title": "Lift planning",
+      "text": "Anticipate critical wind thresholds for crane operations and secure your site schedules."
+    },
+    "use2": {
+      "title": "Site safety",
+      "text": "Spot risky time windows in advance and adapt your safety instructions well ahead of time."
+    },
+    "use3": {
+      "title": "Power production",
+      "text": "Anticipate a wind farm's 24h output to refine your operational decisions."
+    }
+  },
+  "method": {
+    "title": "Methodological transparency",
+    "text": "Every forecast systematically shows MAE, RMSE, MAPE and R² together — never a single metric in isolation. Validated on a causal chronological split, with no data leakage.",
+    "mae": "MAE m/s",
+    "rmse": "RMSE m/s",
+    "mape": "MAPE",
+    "r2": "R²"
+  },
+  "footer": {
+    "tagline": "WindCast — wind forecasting for industry"
+  },
+  "prediction": {
+    "title": "Prediction",
+    "subtitle": "Search for a site or click on the map to get a 24h wind forecast.",
+    "searchPlaceholder": "Search a city, a site...",
+    "mapHint": "Click on the map to pick a point",
+    "lastUpdated": "Last updated",
+    "refreshing": "Refreshing...",
+    "coldStart": {
+      "title": "Starting the forecasting engine…",
+      "text": "The service can take up to a minute to wake up after a period of inactivity."
+    },
+    "error": "Couldn't fetch the forecast. Please try again in a moment.",
+    "details": "Technical details",
+    "modelUsed": "Model used",
+    "exportPdf": "Export as PDF",
+    "addCompare": "Compare another site",
+    "compareTitle": "Multi-site comparison",
+    "regimeTimeline": "Detected regime by hour",
+    "chartTitle": "24h forecast",
+    "confidenceNote": "Indicative forecast — accuracy varies by queried site.",
+    "removeSite": "Remove"
+  },
+  "methodology": {
+    "title": "Methodology",
+    "subtitle": "A validated, transparent dual-model pipeline.",
+    "pipeline": {
+      "title": "Forecasting pipeline",
+      "text": "Calm regime (< 10 m/s): XGBoost model trained directly on calm readings. Strong regime (≥ 10 m/s): a GRU network (24h sequence) corrected by a second XGBoost model trained on residuals. Regime is determined hour by hour with a hysteresis band (9.5–10.5 m/s) to avoid erratic switching."
+    },
+    "validation": {
+      "title": "Validation",
+      "calmSite": "Milan — calm regime",
+      "strongSite": "Wellington, NZ — strong regime"
+    },
+    "limits": {
+      "title": "Limits, honestly",
+      "text": "On very calm sites, relative error (MAPE) mechanically increases because true wind speed is close to zero — an irreducible noise floor exists. For an untested site, the forecast remains indicative: the confidence index accounts for this and phrases it cautiously."
+    },
+    "mapeNote": "The MAPE shown is computed point-by-point on readings > 1 m/s (standard measure). It should not be confused with a simplified relative error (MAE / average speed), which would give a different figure."
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "A question, a site to test? Get in touch.",
+    "email": "Send an email",
+    "freelance": "Available freelance for forecasting and applied data science engagements."
+  }
+}

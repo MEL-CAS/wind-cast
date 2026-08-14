@@ -1,0 +1,19 @@
+{
+  "best_params": {
+    "max_depth": 6,
+    "learning_rate": 0.027478898041918703,
+    "subsample": 0.9602936515683785,
+    "colsample_bytree": 0.8813740862748339,
+    "reg_alpha": 1.8388090317542478,
+    "reg_lambda": 4.528524833256653,
+    "min_child_weight": 7
+  },
+  "test_metrics": {
+    "mae": 0.6258405077851716,
+    "rmse": 0.8896429857452949,
+    "mape": 21.94003730758799,
+    "r2": 0.7829744085631017,
+    "n": 19021,
+    "mape_unavailable": false
+  }
+}
