@@ -5,20 +5,22 @@ import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
 // CARTO's free "dark_all" raster basemap — a real dark style (labels/roads
-// included, no CSS-filter hack needed), no API key required. Retina tiles
-// ({r}) for sharper rendering. Previously used OpenFreeMap's "liberty" style
-// inverted via CSS filter, which was both too dark/murky and too low-res —
-// this replaces that entirely.
+// included, no CSS-filter hack needed), no API key required. Always requests
+// @2x tiles for sharp rendering (CARTO's URL scheme, not the "{r}" Leaflet
+// retina token — that token isn't recognized by MapLibre, so it was leaking
+// into the URL literally as "%7Br%7D" and 404ing every single tile request).
+// Previously used OpenFreeMap's "liberty" style inverted via CSS filter,
+// which was both too dark/murky and too low-res — this replaces that entirely.
 const DARK_STYLE: maplibregl.StyleSpecification = {
   version: 8,
   sources: {
     "carto-dark": {
       type: "raster",
       tiles: [
-        "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-        "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-        "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-        "https://d.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+        "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+        "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+        "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+        "https://d.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
       ],
       tileSize: 256,
       attribution: "© OpenStreetMap contributors © CARTO",

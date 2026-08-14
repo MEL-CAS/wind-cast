@@ -102,7 +102,7 @@ export default function PredictionPage() {
       </Reveal>
 
       <Reveal delay={0.05} className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-4 mb-4">
-        <div className="bg-card border border-border rounded-[18px] p-6">
+        <div className="min-w-0 bg-card border border-border rounded-[18px] p-6">
           <SiteSearch placeholder={t("searchPlaceholder")} onSelect={handleGeocodePick} />
           <p className="text-xs text-text-muted mt-3">{t("mapHint")}</p>
           <div className="mt-3 h-[300px] rounded-[14px] overflow-hidden border border-border">
@@ -110,7 +110,7 @@ export default function PredictionPage() {
           </div>
         </div>
 
-        <div className="bg-card border border-border rounded-[18px] p-6 flex flex-col">
+        <div className="min-w-0 bg-card border border-border rounded-[18px] p-6 flex flex-col">
           <div className="flex items-center justify-between mb-1">
             <h2 className="font-bold text-lg">{site.name}</h2>
             {lastUpdated && !loading && (
@@ -191,7 +191,7 @@ export default function PredictionPage() {
         {compareSites.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {compareSites.map((c) => (
-              <div key={c.id} className="bg-card border border-border rounded-[16px] p-5">
+              <div key={c.id} className="min-w-0 bg-card border border-border rounded-[16px] p-5">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-semibold text-sm">{c.name}</h3>
                   <button
